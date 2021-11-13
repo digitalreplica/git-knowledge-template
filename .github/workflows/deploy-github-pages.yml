@@ -34,7 +34,7 @@ jobs:
           (test -f ${{ env.REPO_LIST_PATH }} && echo "REPO_LIST_EXISTS=true" >>$GITHUB_ENV) || echo "REPO_LIST_EXISTS=false" >>$GITHUB_ENV
       
       - run |
-        cat $GITHUB_ENV
+         cat $GITHUB_ENV
       
       - name: Use Node.js 12
         if: ${{ false }}
