@@ -40,6 +40,7 @@ jobs:
           repository: '${{ env.GIT_KNOWLEDGE_APP_REPO }}'
         
       - run: ls -la
+      - run: git status
 
       - run: echo "${{ env.REPO_LIST_PATH }} exists"
         if: ${{ env.REPO_LIST_EXISTS }}
