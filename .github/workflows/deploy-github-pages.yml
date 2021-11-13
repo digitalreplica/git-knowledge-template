@@ -33,7 +33,7 @@ jobs:
         run: |
           (test -f ${{ env.REPO_LIST_PATH }} && echo "REPO_LIST_EXISTS=true" >> $GITHUB_ENV) || echo "REPO_LIST_EXISTS=false" >> $GITHUB_ENV
       
-      - run: echo "${{ REPO_LIST_PATH }} exists"
+      - run: echo "${{ env.REPO_LIST_PATH }} exists"
         if: ${{ env.REPO_LIST_EXISTS }}
 
       - run: export
