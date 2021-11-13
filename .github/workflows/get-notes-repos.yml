@@ -5,10 +5,6 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Environment
-env:
-  REPO_OWNER: ${{ github.repository_owner }}
-
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   get-public-notes-repos:
@@ -25,4 +21,7 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
         
       - name: Get public notes repos
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO_OWNER: ${{ github.repository_owner }}
         run: gh repo list $REPO_OWNER --public --topic notes --json nameWithOwner --jq '.[]|.nameWithOwner'
