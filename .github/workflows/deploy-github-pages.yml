@@ -53,9 +53,12 @@ jobs:
           repo-list-path: ${{ env.REPO_LIST_PATH }}
           knowledge-json-path: ${{ env.KNOWLEDGE_JSON_PATH }}
       
+      - run: ls -la "${{ env.KNOWLEDGE_JSON_PATH }}"
+      
       - name: Use Node.js 12
-        if: ${{ false }}
+        if: ${{ true }}
         uses: actions/setup-node@v2
+        working-directory: ./git-knowledge-app
         with:
           node-version: '12'
 
