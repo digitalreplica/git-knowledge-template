@@ -36,6 +36,10 @@ jobs:
           path: git-knowledge-app
         
       - run: export
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
 
       - name: Verify repo list exists
         run: |
