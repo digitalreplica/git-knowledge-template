@@ -12,10 +12,10 @@ on:
 
 # Environment
 env:
-  REPO_HREF:            '/git-knowledge-template/'
+  APP_BASE_HREF:          '/{{ github.repository.clone_url }}/'
   GIT_KNOWLEDGE_APP_REPO: 'digitalreplica/git-knowledge-app'
-  REPO_LIST_PATH:       'repos.txt'
-  KNOWLEDGE_JSON_PATH:  'git-knowledge-app/src/assets/knowledge.json'
+  REPO_LIST_PATH:         'repos.txt'
+  KNOWLEDGE_JSON_PATH:    'git-knowledge-app/src/assets/knowledge.json'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -35,7 +35,8 @@ jobs:
           repository: '${{ env.GIT_KNOWLEDGE_APP_REPO }}'
           path: git-knowledge-app
         
-      - run: export
+      - run: echo "$APP_BASE_HREF"
+      - run: echo "${{ github.repository.clone_url }}"
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
