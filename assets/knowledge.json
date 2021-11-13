@@ -1,0 +1,39 @@
+{
+ "tags": {
+  "digitalreplica": [
+   "digitalreplica/test-notes/README.md",
+   "digitalreplica/test-notes/test-note.md"
+  ],
+  "test": [
+   "digitalreplica/test-notes/README.md",
+   "digitalreplica/test-notes/test-note.md",
+   "digitalreplica/test-notes/test-note.md"
+  ],
+  "notes": [
+   "digitalreplica/test-notes/README.md",
+   "digitalreplica/test-notes/test-note.md"
+  ],
+  "readme": [
+   "digitalreplica/test-notes/README.md"
+  ],
+  "note": [
+   "digitalreplica/test-notes/test-note.md"
+  ]
+ },
+ "files": {
+  "digitalreplica/test-notes/README.md": {
+   "name": "README.md",
+   "path": "README.md",
+   "size": 61,
+   "html_url": "https://github.com/digitalreplica/test-notes/blob/main/README.md",
+   "repo": "digitalreplica/test-notes"
+  },
+  "digitalreplica/test-notes/test-note.md": {
+   "name": "test-note.md",
+   "path": "test-note.md",
+   "size": 15,
+   "html_url": "https://github.com/digitalreplica/test-notes/blob/main/test-note.md",
+   "repo": "digitalreplica/test-notes"
+  }
+ }
+}
