@@ -38,9 +38,11 @@ jobs:
         
       - run: export
       - run: echo "$APP_BASE_HREF"
+        env:
+          APP_BASE_HREF: ${{ github.name }}
       - run: echo $REPO_CLONE_URL
         env:
-          REPO_CLONE_URL: ${{ github.repository }}
+          REPO_CLONE_URL: ${{ github.event.repository.clone_url }}
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
