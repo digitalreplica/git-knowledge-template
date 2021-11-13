@@ -37,7 +37,7 @@ jobs:
         if: ${{ env.REPO_LIST_EXISTS }}
 
       - run: export
-        with:
+        env:
           repo-list-path: ${{ env.REPO_LIST_PATH }}
 
       - name: Use Node.js 12
