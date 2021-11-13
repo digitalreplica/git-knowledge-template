@@ -56,14 +56,13 @@ jobs:
       - run: ls -la "${{ env.KNOWLEDGE_JSON_PATH }}"
       
       - name: Use Node.js 12
-        if: ${{ true }}
         uses: actions/setup-node@v2
-        working-directory: ./git-knowledge-app
         with:
           node-version: '12'
 
       - name: Install dependencies
-        if: ${{ false }}
+        if: ${{ true }}
+        working-directory: ./git-knowledge-app
         run: npm install
 
       - name: Deploy to GitHub pages using angular-cli-ghpages
