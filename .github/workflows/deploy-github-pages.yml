@@ -42,11 +42,6 @@ jobs:
           repository: '${{ env.GIT_KNOWLEDGE_APP_REPO }}'
           path: git-knowledge-app
         
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
-
       - name: Verify repo list exists
         run: |
           (test -f ${{ env.REPO_LIST_PATH }} && echo "REPO_LIST_EXISTS=true" >> $GITHUB_ENV) || echo "REPO_LIST_EXISTS=false" >> $GITHUB_ENV
@@ -62,7 +57,8 @@ jobs:
           repo-list-path: ${{ env.REPO_LIST_PATH }}
           knowledge-json-path: ${{ env.KNOWLEDGE_JSON_PATH }}
       
-      - run: ls -la "${{ env.KNOWLEDGE_JSON_PATH }}"
+      - name: List knowledge.json file
+        run: ls -la "${{ env.KNOWLEDGE_JSON_PATH }}"
       
       - name: Use Node.js 12
         uses: actions/setup-node@v2
@@ -70,12 +66,12 @@ jobs:
           node-version: '12'
 
       - name: Install dependencies
-        if: ${{ false }}
+        if: ${{ true }}
         working-directory: ./git-knowledge-app
         run: npm install
 
       - name: Deploy to GitHub pages using angular-cli-ghpages
-        if: ${{ false }}
+        if: ${{ true }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm run ng -- deploy --base-href='/git-knowledge-app/' --name="deploy-bot" --email=deploybot@digitalreplica.org
+        run: npm run ng -- deploy --base-href=${{ APP_BASE_HREF }} --repo=${{ REPO_CLONE_URL }} --name=github-actions --email=github-actions@github.com
