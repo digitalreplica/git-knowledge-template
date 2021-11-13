@@ -27,3 +27,22 @@ Once the app is published for the first time, GitHub Pages can be configured for
 3) Click the ```Save``` button.
 
 The URL should be displayed at the top of the page.
+
+## Additional workflows
+There are additional GitHub Action workflows to help manage knowledge repos
+
+### get-notes-repos.yml
+This workflow lists notes repos that can be saved into the repos.txt file. By default, it looks for:
+* Public repos
+* With the ```notes``` topic
+* For the owner of the current repo
+
+Change the REPO_OWNER variable to look for a different user or organization
+
+### get-notes-markdown-links.yml
+This workflow makes a list of markdown links for note repos. By default, it looks for:
+* Public repos
+* With the ```notes``` topic
+* For the owner of the current repo
+
+It formats the repos as a list, with a markdown link to each repo and the repo description. Change the REPO_OWNER variable to look for a different user or organization
