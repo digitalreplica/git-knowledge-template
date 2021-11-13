@@ -35,8 +35,7 @@ jobs:
           repository: '${{ env.GIT_KNOWLEDGE_APP_REPO }}'
           path: git-knowledge-app
         
-      - run: ls -la
-      - run: git status
+      - run: export
 
       - name: Verify repo list exists
         run: |
