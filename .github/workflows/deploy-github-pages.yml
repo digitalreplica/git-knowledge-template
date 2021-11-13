@@ -13,7 +13,7 @@ on:
 # Environment
 env:
   REPO_HREF:            '/git-knowledge-app/'
-  REPO_LIST_PATH:       'README.md'
+  REPO_LIST_PATH:       'repos.txt'
   KNOWLEDGE_JSON_PATH:  'src/assets/knowledge.json'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -37,7 +37,9 @@ jobs:
         if: ${{ env.REPO_LIST_EXISTS }}
 
       - run: export
-      
+        with:
+          repo-list-path: ${{ env.REPO_LIST_PATH }}
+
       - name: Use Node.js 12
         if: ${{ false }}
         uses: actions/setup-node@v2
@@ -53,8 +55,8 @@ jobs:
         uses: digitalreplica/git-knowledge-json-action@main
         with:
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
-          repo-list-path: 'repos.txt'
-          knowledge-json-path: 
+          repo-list-path: ${{ env.REPO_LIST_PATH }}
+          knowledge-json-path: ${{ env.KNOWLEDGE_JSON_PATH }}
       
       - name: Deploy to GitHub pages using angular-cli-ghpages
         if: ${{ false }}
