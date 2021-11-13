@@ -12,7 +12,7 @@ on:
 
 # Environment
 env:
-  APP_BASE_HREF:          '/${{ github.repository.clone_url }}/'
+  APP_BASE_HREF:          format('/{0}/', github.repository.clone_url)
   REPO_CLONE_URL:         '${{ github.repository.clone_url }}'
   GIT_KNOWLEDGE_APP_REPO: 'digitalreplica/git-knowledge-app'
   REPO_LIST_PATH:         'repos.txt'
@@ -36,6 +36,7 @@ jobs:
           repository: '${{ env.GIT_KNOWLEDGE_APP_REPO }}'
           path: git-knowledge-app
         
+      - run: export
       - run: echo "$APP_BASE_HREF"
       - run: echo $REPO_CLONE_URL
       - name: Dump GitHub context
@@ -66,7 +67,7 @@ jobs:
           node-version: '12'
 
       - name: Install dependencies
-        if: ${{ true }}
+        if: ${{ false }}
         working-directory: ./git-knowledge-app
         run: npm install
 
