@@ -1,0 +1,26 @@
+name: Get public notes repos for the current user
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Environment
+env:
+  APP_BASE_HREF:          ${{ format('/{0}/', github.event.repository.name) }}
+  REPO_CLONE_URL:         ${{ github.event.repository.clone_url }}
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  get-public-notes-repos:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Disabled by default, change to true to enable
+      - name: Dump github context
+        if: ${{ true }}
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
