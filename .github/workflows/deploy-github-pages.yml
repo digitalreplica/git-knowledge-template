@@ -12,7 +12,7 @@ on:
 
 # Environment
 env:
-  APP_BASE_HREF:          ${{ format('/{0}/', github.event.name) }}
+  APP_BASE_HREF:          ${{ format('/{0}/', github.event.repository.name) }}
   REPO_CLONE_URL:         ${{ github.event.repository.clone_url }}
   GIT_KNOWLEDGE_APP_REPO: 'digitalreplica/git-knowledge-app'
   REPO_LIST_PATH:         'repos.txt'
@@ -27,6 +27,12 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: Dump env context
+        if: ${{ true }}
+        env:
+          ENV_CONTEXT: ${{ toJSON(env) }}
+        run: echo "$ENV_CONTEXT"
+
       - name: Checkout knowledge repo
         uses: actions/checkout@v2
         
@@ -36,11 +42,6 @@ jobs:
           repository: '${{ env.GIT_KNOWLEDGE_APP_REPO }}'
           path: git-knowledge-app
         
-      - run: export
-      - run: echo "$APP_BASE_HREF"
-        env:
-          APP_BASE_HREF: ${{ github.event.name }}
-      - run: echo $REPO_CLONE_URL
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
