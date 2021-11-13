@@ -72,6 +72,7 @@ jobs:
 
       - name: Deploy to GitHub pages using angular-cli-ghpages
         if: ${{ true }}
+        working-directory: ./git-knowledge-app
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run ng -- deploy --base-href=$APP_BASE_HREF --repo=$REPO_CLONE_URL --name=github-actions --email=github-actions@github.com
