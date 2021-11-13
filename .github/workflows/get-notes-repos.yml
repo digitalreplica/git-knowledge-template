@@ -7,8 +7,7 @@ on:
 
 # Environment
 env:
-  APP_BASE_HREF:          ${{ format('/{0}/', github.event.repository.name) }}
-  REPO_CLONE_URL:         ${{ github.event.repository.clone_url }}
+  REPO_OWNER: ${{ repository_owner }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -20,7 +19,10 @@ jobs:
     steps:
       # Disabled by default, change to true to enable
       - name: Dump github context
-        if: ${{ true }}
+        if: ${{ false }}
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
+        
+      - name: Get public notes repos
+        run: gh repo list $REPO_OWNER --public --topic notes --json nameWithOwner --jq '.[]|.nameWithOwner'
