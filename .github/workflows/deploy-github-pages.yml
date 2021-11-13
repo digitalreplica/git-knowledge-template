@@ -12,8 +12,8 @@ on:
 
 # Environment
 env:
-  APP_BASE_HREF:          format('/{0}/', github.repository.clone_url)
-  REPO_CLONE_URL:         '${{ github.repository.clone_url }}'
+  APP_BASE_HREF:          ${{ format('/{0}/', github.repository.clone_url) }}
+  REPO_CLONE_URL:         ${{ github.repository.clone_url }}
   GIT_KNOWLEDGE_APP_REPO: 'digitalreplica/git-knowledge-app'
   REPO_LIST_PATH:         'repos.txt'
   KNOWLEDGE_JSON_PATH:    'git-knowledge-app/src/assets/knowledge.json'
