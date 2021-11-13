@@ -29,7 +29,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
         
-      - run: '(test -f ${{ REPO_LIST_PATH }} && echo README exists) || echo README does not exist, skipping step'
+      - run: '(test -f ${{ env.REPO_LIST_PATH }} && echo README exists) || echo README does not exist, skipping step'
       
       - name: Use Node.js 12
         if: ${{ false }}
