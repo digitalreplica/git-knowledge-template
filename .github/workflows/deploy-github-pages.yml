@@ -74,4 +74,4 @@ jobs:
         if: ${{ true }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm run ng -- deploy --base-href=${{ APP_BASE_HREF }} --repo=${{ REPO_CLONE_URL }} --name=github-actions --email=github-actions@github.com
+        run: npm run ng -- deploy --base-href=$APP_BASE_HREF --repo=$REPO_CLONE_URL --name=github-actions --email=github-actions@github.com
