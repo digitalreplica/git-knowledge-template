@@ -24,4 +24,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO_OWNER: ${{ github.repository_owner }}
-        run: gh repo list $REPO_OWNER --public --topic notes --json nameWithOwner,url,description --jq '.[]|"["+.nameWithOwner+"]("+.url+"): "+.description'
+        run: |
+          gh repo list $REPO_OWNER --public --topic notes --json nameWithOwner,url,description --jq '.[]|"["+.nameWithOwner+"]("+.url+"): "+.description'
