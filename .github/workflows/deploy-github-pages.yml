@@ -5,17 +5,17 @@ name: Deploy to GitHub Pages via angular-cli-ghpages
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
-  #push:
-  #  branches: [ main ]
+  push:
+    branches: [ main ]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # Environment
 env:
-  REPO_HREF:            '/git-knowledge-app/'
+  REPO_HREF:            '/git-knowledge-template/'
   GIT_KNOWLEDGE_APP_REPO: 'digitalreplica/git-knowledge-app'
   REPO_LIST_PATH:       'repos.txt'
-  KNOWLEDGE_JSON_PATH:  'src/assets/knowledge.json'
+  KNOWLEDGE_JSON_PATH:  'git-knowledge-app/src/assets/knowledge.json'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -26,14 +26,9 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout repo
+      - name: Checkout knowledge repo
         uses: actions/checkout@v2
         
-      - name: Verify repo list exists
-        run: |
-          (test -f ${{ env.REPO_LIST_PATH }} && echo "REPO_LIST_EXISTS=true" >> $GITHUB_ENV) || echo "REPO_LIST_EXISTS=false" >> $GITHUB_ENV
-      
       - name: Checkout git-knowledge-app
         uses: actions/checkout@v2
         with:
@@ -43,15 +38,23 @@ jobs:
       - run: ls -la
       - run: git status
 
+      - name: Verify repo list exists
+        run: |
+          (test -f ${{ env.REPO_LIST_PATH }} && echo "REPO_LIST_EXISTS=true" >> $GITHUB_ENV) || echo "REPO_LIST_EXISTS=false" >> $GITHUB_ENV
+      
       - run: echo "${{ env.REPO_LIST_PATH }} exists"
         if: ${{ env.REPO_LIST_EXISTS }}
 
-      - run: export
-        env:
-          repo-list-path: ${{ env.REPO_LIST_PATH }}
-
-      - name: Use Node.js 12
+      - name: Create knowledge.json file
         if: ${{ env.REPO_LIST_EXISTS }}
+        uses: digitalreplica/git-knowledge-json-action@main
+        with:
+          repo-token: '${{ secrets.GITHUB_TOKEN }}'
+          repo-list-path: ${{ env.REPO_LIST_PATH }}
+          knowledge-json-path: ${{ env.KNOWLEDGE_JSON_PATH }}
+      
+      - name: Use Node.js 12
+        if: ${{ false }}
         uses: actions/setup-node@v2
         with:
           node-version: '12'
@@ -60,14 +63,6 @@ jobs:
         if: ${{ false }}
         run: npm install
 
-      - name: Create knowledge.json file
-        if: ${{ false }}
-        uses: digitalreplica/git-knowledge-json-action@main
-        with:
-          repo-token: '${{ secrets.GITHUB_TOKEN }}'
-          repo-list-path: ${{ env.REPO_LIST_PATH }}
-          knowledge-json-path: ${{ env.KNOWLEDGE_JSON_PATH }}
-      
       - name: Deploy to GitHub pages using angular-cli-ghpages
         if: ${{ false }}
         env:
