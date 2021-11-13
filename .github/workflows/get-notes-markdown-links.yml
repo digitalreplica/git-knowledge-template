@@ -1,4 +1,4 @@
-name: Get public notes repo descriptions for the current user as markdown links
+name: Get notes repo markdown links
 
 # Controls when the workflow will run
 on:
