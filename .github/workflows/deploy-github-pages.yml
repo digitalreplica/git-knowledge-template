@@ -34,10 +34,11 @@ jobs:
         run: |
           (test -f ${{ env.REPO_LIST_PATH }} && echo "REPO_LIST_EXISTS=true" >> $GITHUB_ENV) || echo "REPO_LIST_EXISTS=false" >> $GITHUB_ENV
       
-      - name: Checkout repo
+      - name: Checkout git-knowledge-app
         uses: actions/checkout@v2
         with:
           repository: '${{ env.GIT_KNOWLEDGE_APP_REPO }}'
+          path: git-knowledge-app
         
       - run: ls -la
       - run: git status
