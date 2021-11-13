@@ -13,7 +13,7 @@ on:
 # Environment
 env:
   REPO_HREF:            '/git-knowledge-app/'
-  REPO_LIST_PATH:       'repos.txt'
+  REPO_LIST_PATH:       'README.md'
   KNOWLEDGE_JSON_PATH:  'src/assets/knowledge.json'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -33,6 +33,9 @@ jobs:
         run: |
           (test -f ${{ env.REPO_LIST_PATH }} && echo "REPO_LIST_EXISTS=true" >> $GITHUB_ENV) || echo "REPO_LIST_EXISTS=false" >> $GITHUB_ENV
       
+      - run: echo "${{ REPO_LIST_PATH }} exists"
+        if: ${{ env.REPO_LIST_EXISTS }}
+
       - run: export
       
       - name: Use Node.js 12
