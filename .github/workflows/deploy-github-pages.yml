@@ -44,7 +44,7 @@ jobs:
 
       # Disabled by default, change to true to enable
       - name: Dump env context
-        if: ${{ true }}
+        if: ${{ false }}
         env:
           ENV_CONTEXT: ${{ toJSON(env) }}
         run: echo "$ENV_CONTEXT"
