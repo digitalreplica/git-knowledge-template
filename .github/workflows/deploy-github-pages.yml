@@ -15,8 +15,6 @@ on:
 
 # Environment
 env:
-  APP_BASE_HREF:          ${{ format('/{0}/', github.event.repository.name) }}
-  REPO_CLONE_URL:         ${{ github.event.repository.clone_url }}
   GIT_KNOWLEDGE_APP_REPO: 'digitalreplica/git-knowledge-app'
   REPO_LIST_PATH:         'repos.txt'
   KNOWLEDGE_JSON_PATH:    'git-knowledge-app/src/assets/knowledge.json'
@@ -30,9 +28,23 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      # github.event.repository.name not available on schedule, so cut from GITHUB_REPOSITORY
+      - name: Get Repo Name
+        run: |
+          REPO_NAME=`echo "$GITHUB_REPOSITORY" | cut -d '/' -f 2`
+          echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_ENV
+      
+      # github.event.repository.clone_url not available on schedule, so calculate from github.repositoryUrl
+      - name: Get Repo clone_url
+        env:
+          REPO_URL: ${{ github.repositoryUrl }}
+        run: |
+          REPO_CLONE_URL=`echo "$REPO_URL" | sed 's/git:/https:/'`
+          echo "REPO_CLONE_URL=${REPO_CLONE_URL}" >> $GITHUB_ENV
+
       # Disabled by default, change to true to enable
       - name: Dump env context
-        if: ${{ false }}
+        if: ${{ true }}
         env:
           ENV_CONTEXT: ${{ toJSON(env) }}
         run: echo "$ENV_CONTEXT"
@@ -83,4 +95,5 @@ jobs:
         working-directory: ./git-knowledge-app
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          APP_BASE_HREF:          ${{ format('/{0}/', REPO_NAME) }}
         run: npm run ng -- deploy --base-href=$APP_BASE_HREF --repo=$REPO_CLONE_URL --name=github-actions --email=github-actions@github.com
