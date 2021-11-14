@@ -95,5 +95,5 @@ jobs:
         working-directory: ./git-knowledge-app
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          APP_BASE_HREF:          ${{ format('/{0}/', REPO_NAME) }}
+          APP_BASE_HREF:          ${{ format('/{0}/', env.REPO_NAME) }}
         run: npm run ng -- deploy --base-href=$APP_BASE_HREF --repo=$REPO_CLONE_URL --name=github-actions --email=github-actions@github.com
