@@ -46,3 +46,6 @@ This workflow makes a list of markdown links for note repos. By default, it look
 * For the owner of the current repo
 
 It formats the repos as a list, with a markdown link to each repo and the repo description. Change the REPO_OWNER variable to look for a different user or organization
+
+# Known Issues
+* When using this repo as a template, there's no easy way to incorporate changes into the new repo
