@@ -51,17 +51,18 @@ It formats the repos as a list, with a markdown link to each repo and the repo d
 Git-knowledge can also be used to search private notes, but takes a few extra steps to prevent the application from becoming public. This method uses Github Actions to generate the site, but doesn't publish it to GitHub Pages. You can then checkout the branch on a local computer, and open the html file for the application.
 
 1) Use this template to create a new repo, but set the repo to private.
-2) Create a [Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). Give it ```repo``` access, so it can access private repositories.
-3) Add the token as a [repository encrypted secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository). Note the name to use later.
-4) Edit .github/workflows/deploy-github-pages.yml
-5) Change ```GH_PAGES_BRANCH``` from ```gh-pages``` to anything else, like ```knowledge``` or ```deploy```. This prevents creating the GitHub Pages site. 
-6) Change ```APP_BASE_HREF``` to ```./``` so the application works locally.
-7) Under the ```Create knowledge.json file``` step, change ```repo-token``` to ```'${{ secrets.YOUR_SECRET_NAME }}'```, changing YOUR_SECRET_NAME to the name of your secret.
-8) Commit the file.
-9) Under the ```Actions``` tab, make sure the ```Deploy to GitHub Pages``` action completes successfully.
-10) Add private repos into the ```repos.txt``` file. Check actions again to make sure it completes sucessfully.
-11) Clone the repo to your local workstation. Check out the GH_PAGES_BRANCH branch.
-12) Open ```index.html``` in a browser.
+2) Do **not** enable GitHub Pages for the repo.
+3) Create a [Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). Give it ```repo``` access, so it can access private repositories.
+4) Add the token as a [repository encrypted secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository). Note the name to use later.
+5) Edit .github/workflows/deploy-github-pages.yml
+6) Change ```GH_PAGES_BRANCH``` from ```gh-pages``` to anything else, like ```knowledge``` or ```deploy```. This prevents creating the GitHub Pages site. 
+7) Change ```APP_BASE_HREF``` to ```./``` so the application works locally.
+8) Under the ```Create knowledge.json file``` step, change ```repo-token``` to ```'${{ secrets.YOUR_SECRET_NAME }}'```, changing YOUR_SECRET_NAME to the name of your secret.
+9) Commit the file.
+10) Under the ```Actions``` tab, make sure the ```Deploy to GitHub Pages``` action completes successfully.
+11) Add private repos into the ```repos.txt``` file. Check actions again to make sure it completes sucessfully.
+12) Clone the repo to your local workstation. Check out the GH_PAGES_BRANCH branch.
+13) Open ```index.html``` in a browser.
 
 If you have the GitHub CLI installed, here's a command to find all notes repositories (public and private). It assumes you've given your notes repo the topic ```notes```. Change ```GITHUB_USERNAME``` to your GitHub username.
 
